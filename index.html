@@ -50,17 +50,17 @@ p{margin:0}
 /* ---------- header ---------- */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,color .4s,box-shadow .4s;background:rgba(11,31,68,.0)}
 .hdr.scrolled{background:rgba(11,31,68,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-d)}
-body.on-light .hdr.scrolled{background:rgba(245,248,252,.78);box-shadow:0 1px 0 var(--line-l);color:var(--ink)}
+body.on-light .hdr.scrolled{background:rgba(11,31,68,.88);box-shadow:0 1px 0 var(--line-d);color:var(--paper)}
 .hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand svg{width:38px;height:38px;flex:none}
+.brand-logo{display:block;width:180px;height:auto;max-height:68px;object-fit:contain;object-position:left center;flex:none}
 .brand b{font-family:var(--f-display);font-weight:600;font-size:1.45rem;letter-spacing:-.02em;line-height:1}
 .brand small{display:block;font-size:.62rem;letter-spacing:.02em;opacity:.7;margin-top:3px;font-family:var(--f-body)}
 .nav{display:flex;gap:28px;font-family:var(--f-display);font-size:.9rem}
 .nav a{text-decoration:none;opacity:.78;position:relative;padding-block:6px}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--cyan);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .nav a:hover{opacity:1}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
-@media (max-width:899px){.nav{display:none}.brand small{display:none}}
+@media (max-width:899px){.nav{display:none}.brand small{display:none}.brand-logo{width:150px;max-height:58px}}
 
 /* ---------- buttons (hexagonais) ---------- */
 .btn{--cut:13px;display:inline-flex;align-items:center;gap:.65em;padding:1em 1.6em;font:600 .95rem/1 var(--f-display);text-decoration:none;border:0;cursor:pointer;clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% 50%,calc(100% - var(--cut)) 100%,var(--cut) 100%,0 50%);transition:background .3s,color .3s;white-space:nowrap}
@@ -368,8 +368,7 @@ body.on-light .hud b{color:var(--deep)}
 <header class="hdr" id="hdr">
   <div class="wrap hdr-in">
     <a class="brand" href="#topo" aria-label="Tinano, início">
-      <svg aria-hidden="true"><use href="#mark"/></svg>
-      <span><b>Tinano</b><small>Nano Tecnologia da Informação</small></span>
+      <img class="brand-logo" src="assets/tinano-header-logo.png" alt="Tinano — Nano Tecnologia da Informação">
     </a>
     <nav class="nav" aria-label="Principal">
       <a href="#solucoes">Soluções</a><a href="#ecossistema">Ecossistema</a><a href="#processo">Processo</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a>
