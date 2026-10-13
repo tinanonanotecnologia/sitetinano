@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B1F44">
+<title>Tinano · Sites, sistemas e IA em Maringá - PR</title>
+<meta name="description" content="Tinano, Nano Tecnologia da Informação. Sites imersivos, sistemas de gestão e automações com IA no WhatsApp para empresas de Maringá - PR e de todo o Brasil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Tinano — Nano Tecnologia da Informação","url":"https://tinano.com.br","email":"contato@tinano.com.br","telephone":"+55 44 98839-5181","address":{"@type":"PostalAddress","streetAddress":"Rua Darville Antônio Huergo, 2547","postalCode":"87083-604","addressLocality":"Maringá","addressRegion":"PR","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-23.4205,"longitude":-51.9333},"sameAs":["https://www.instagram.com/tinano.com.br/","https://www.facebook.com/share/1Js2pGuy89/"]}
+</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Tinano · Nano Tecnologia da Informação">
+<meta property="og:description" content="Sites, sistemas e automações com IA em Maringá - PR.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tinano.com.br">
+<link rel="canonical" href="https://tinano.com.br/">
+<style>
+/* Layout: capítulos alternando marinho e off-white, costurados por "cortinas" de hexágonos; uma molécula 3D fixa atravessa o site (abre no topo, se desmonta, volta remontada no contato). */
+:root{
+  --navy:#0B1F44; --abyss:#081733; --deep:#0066A8; --blue:#0288D1; --cyan:#00C2E7; --coral:#FF8B61;
+  --paper:#F5F8FC; --white:#FFFFFF; --ink:#0B1F44; --ink-2:#47597A; --mist:#C0CEE4;
+  --line-d:rgba(0,194,231,.18); --line-l:rgba(11,31,68,.12);
+  --f-display:'Lexend','Segoe UI',system-ui,sans-serif;
+  --f-body:'Manrope',system-ui,-apple-system,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --gutter:clamp(16px,5vw,72px);
+  --seam:clamp(110px,17vh,210px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--navy);color:var(--paper);font-family:var(--f-body);font-size:16px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+::selection{background:var(--cyan);color:var(--navy)}
+.wrap{max-width:1320px;margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.7em;color:var(--cyan)}
+.light .eyebrow{color:var(--deep)}
+.eyebrow::before{content:"";width:11px;height:12px;background:currentColor;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+
+/* ---------- canvas 3D ---------- */
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+
+/* ---------- header ---------- */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,color .4s,box-shadow .4s;background:rgba(11,31,68,.0)}
+.hdr.scrolled{background:rgba(11,31,68,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-d)}
+body.on-light .hdr.scrolled{background:rgba(245,248,252,.78);box-shadow:0 1px 0 var(--line-l);color:var(--ink)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:38px;height:38px;flex:none}
+.brand b{font-family:var(--f-display);font-weight:600;font-size:1.45rem;letter-spacing:-.02em;line-height:1}
+.brand small{display:block;font-size:.62rem;letter-spacing:.02em;opacity:.7;margin-top:3px;font-family:var(--f-body)}
+.nav{display:flex;gap:28px;font-family:var(--f-display);font-size:.9rem}
+.nav a{text-decoration:none;opacity:.78;position:relative;padding-block:6px}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--cyan);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.nav a:hover{opacity:1}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+@media (max-width:899px){.nav{display:none}.brand small{display:none}}
+
+/* ---------- buttons (hexagonais) ---------- */
+.btn{--cut:13px;display:inline-flex;align-items:center;gap:.65em;padding:1em 1.6em;font:600 .95rem/1 var(--f-display);text-decoration:none;border:0;cursor:pointer;clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% 50%,calc(100% - var(--cut)) 100%,var(--cut) 100%,0 50%);transition:background .3s,color .3s;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-coral{background:var(--cyan);color:var(--navy)}
+.btn-coral:hover{background:#7FE6FA}
+.light .btn-coral,body.on-light .hdr .btn-coral{background:var(--navy);color:var(--white)}
+.light .btn-coral:hover,body.on-light .hdr .btn-coral:hover{background:var(--deep)}
+.btn-ghost{background:rgba(0,194,231,.12);color:var(--cyan)}
+.btn-ghost:hover{background:rgba(0,194,231,.22)}
+.btn:focus-visible{outline:none;background:var(--cyan);color:var(--navy)}
+.btn-sm{padding:.8em 1.2em;font-size:.85rem;--cut:10px}
+
+/* ---------- sections ---------- */
+.sec{position:relative;z-index:1}
+.sec.light{background:var(--paper);color:var(--ink)}
+.sec.dark{background:var(--navy);color:var(--paper)}
+.sec.clear{background:transparent;color:var(--paper)}
+.seam{position:absolute;left:0;right:0;top:-72vh;height:72vh;pointer-events:none;z-index:6}
+.seam canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* preloader */
+.pre{position:fixed;inset:0;z-index:200;background:#050f24;display:grid;place-items:center;color:var(--mist);font-family:var(--f-mono)}
+.pre-in{display:grid;gap:14px;justify-items:center;text-align:center}
+.pre b{font-family:var(--f-display);font-weight:500;color:var(--paper);font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.01em}
+.pre .sc{font-size:.8rem;letter-spacing:.2em;color:var(--cyan)}
+.pre .bar{width:180px;height:2px;background:rgba(169,188,216,.2);position:relative;overflow:hidden}
+.pre .bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--cyan),var(--coral));transform-origin:left;transform:scaleX(0)}
+.sec-head{display:grid;gap:18px;max-width:760px}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.04;font-weight:600}
+.sec-head p{font-size:1.08rem;color:var(--ink-2);max-width:58ch}
+.dark .sec-head p,.clear .sec-head p{color:var(--mist)}
+
+/* ---------- hero ---------- */
+#topo{height:100svh;min-height:620px;display:flex;align-items:center}
+.hero-in{width:100%;padding-block:120px 64px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:32px}
+.hero-copy{display:grid;gap:26px;max-width:660px}
+h1{font-size:clamp(2.6rem,6.2vw,5.5rem);line-height:.98;font-weight:600;letter-spacing:-.035em}
+.ln{display:block;overflow:hidden;padding-bottom:.07em;margin-bottom:-.07em}
+.ln>span{display:inline-block}
+.hl{color:var(--cyan)}
+.dot{color:var(--coral)}
+.hero-sub{font-size:clamp(1.02rem,1.4vw,1.2rem);color:var(--mist);max-width:50ch}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-foot{display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--f-mono);font-size:.76rem;letter-spacing:.06em;color:#DCE6F4;padding-top:8px}
+.hero-foot span{display:inline-flex;align-items:center;gap:.6em}
+.hero-foot i{width:9px;height:10px;background:var(--cyan);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.hero-foot span:last-child i{background:var(--coral)}
+.hero-art{display:none;justify-self:center;width:min(420px,80%)}
+body.no-webgl .hero-art{display:block}
+@media (max-width:899px){
+  .hero-in{grid-template-columns:1fr;padding-top:calc(72px + 38vh)}
+  body.no-webgl .hero-in{padding-top:110px}
+  .hero-art{order:-1;width:min(240px,60%)}
+}
+
+/* ---------- manifesto ---------- */
+.manifesto{padding-block:72px 110px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:48px;align-items:center;min-height:86vh}
+.prism-wrap{perspective:1100px;display:grid;place-items:center;height:420px}
+.prism{position:relative;width:160px;height:300px;transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(20deg)}
+.prism .f{position:absolute;left:0;top:0;width:160px;height:300px;border:1.5px solid rgba(2,136,209,.55);background:linear-gradient(180deg,rgba(0,194,231,.10),rgba(2,136,209,.03));backface-visibility:visible}
+.prism .f::before{content:"";position:absolute;left:22%;top:18%;width:40%;height:46%;border-left:1.5px solid rgba(0,194,231,.6);border-bottom:1.5px solid rgba(0,194,231,.6)}
+.prism .f::after{content:"";position:absolute;left:calc(62% - 5px);top:calc(64% - 5px);width:10px;height:10px;border-radius:50%;background:var(--cyan)}
+.prism .f:nth-child(3)::after{background:var(--coral)}
+.prism .cap{position:absolute;left:-10px;top:61px;width:180px;height:178px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:rgba(2,136,209,.16)}
+@media (max-width:899px){.manifesto{grid-template-columns:1fr;min-height:0;padding-block:64px 100px}.prism-wrap{height:300px;order:-1}.prism{transform:scale(.75) rotateX(-14deg) rotateY(20deg)}}
+.manifesto .eyebrow{margin-bottom:28px}
+.manifesto p{font-family:var(--f-display);font-weight:400;font-size:clamp(1.55rem,3.3vw,2.9rem);line-height:1.22;letter-spacing:-.02em;max-width:30ch}
+.manifesto .w{color:rgba(11,31,68,.42)}
+.manifesto .w.k{font-weight:500}
+@media (prefers-reduced-motion:reduce){.manifesto .w{color:var(--ink)}.manifesto .w.k{color:var(--blue)}}
+.no-gsap .manifesto .w{color:var(--ink)}
+
+/* ---------- colmeia de soluções ---------- */
+#solucoes{--w:clamp(228px,25.5vh,290px);--h:calc(var(--w)*1.1547);--gap:10px}
+.hive-pin{display:flex;flex-direction:column;gap:clamp(32px,5vh,56px);padding-block:72px 120px;overflow:hidden;perspective:1600px}
+.hive-track{position:relative;height:calc(var(--h)*1.75 + var(--gap));width:calc(6*(var(--w)/2 + var(--gap)) + var(--w));flex:none;margin-left:var(--gutter)}
+.hcard{position:absolute;left:calc(var(--i)*(var(--w)/2 + var(--gap)));top:calc(var(--odd)*(var(--h)*.75 + var(--gap)));width:var(--w);height:var(--h);perspective:900px}
+.hface{position:relative;width:100%;height:100%;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(160deg,rgba(0,194,231,.9),rgba(2,136,209,.55));transition:background .4s}
+.hface::before{content:"";position:absolute;inset:2px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--white)}
+.hcard.ink .hface::before{background:var(--navy)}
+.hcard:hover .hface{background:linear-gradient(160deg,var(--coral),var(--blue))}
+.hbody{position:absolute;inset:21% 15%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:8px;z-index:1}
+.hbody svg{width:30px;height:30px;color:var(--blue);flex:none}
+.hcard.ink .hbody svg{color:var(--cyan)}
+.hbody h3{font-size:1.04rem;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.hbody p{font-size:.83rem;line-height:1.42;color:var(--ink-2)}
+.hcard.ink{color:var(--paper)}
+.hcard.ink .hbody p{color:var(--mist)}
+.hbody .tag{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--deep)}
+.hcard.ink .tag{color:var(--coral)}
+@media (min-width:900px){.hive-track{margin-inline:auto}#solucoes{--w:clamp(236px,17vw,290px)}}
+@media (max-width:899px){
+  .hive-pin{min-height:0;padding-block:80px 90px}
+  .hive-track{position:static;width:auto;height:auto;margin-inline:var(--gutter);display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+  .hcard{position:static;width:auto;height:auto}
+  .hface,.hface::before{clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 50%,calc(100% - 20px) 100%,20px 100%,0 50%)}
+  .hface::before{inset:1.5px}
+  .hbody{position:relative;inset:auto;padding:24px 36px;align-items:flex-start;text-align:left}
+}
+
+/* ---------- ecossistema ---------- */
+.eco-pin{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:48px;padding-block:80px}
+.eco-steps{display:grid;gap:22px;margin-top:34px;padding:0;list-style:none}
+.eco-step{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline}
+.eco-step b{font-family:var(--f-mono);font-size:.74rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;grid-row:span 2;min-width:4.6em}
+.eco-step h3{font-size:1.25rem;font-weight:500}
+.eco-step p{color:var(--mist);font-size:.96rem;max-width:44ch}
+.eco-svg{width:100%;max-width:580px;justify-self:center;overflow:visible}
+@media (max-width:899px){.eco-pin{grid-template-columns:1fr;min-height:0;padding-block:72px 96px}.eco-svg{order:-1;max-width:420px}}
+
+/* ---------- processo ---------- */
+.process{padding-block:72px 120px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+.process .sec-head{position:sticky;top:120px}
+.steps{position:relative;padding-left:64px;display:grid;gap:64px;list-style:none;margin:0}
+.rail{position:absolute;left:17px;top:10px;bottom:10px;width:2px;background:var(--line-l)}
+.rail i{display:block;height:100%;background:linear-gradient(var(--cyan),var(--blue));transform-origin:top;transform:scaleY(1)}
+.step{position:relative;display:grid;gap:8px}
+.step .node{position:absolute;left:-64px;top:2px;width:36px;height:40px;background:var(--paper);display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);transition:background .4s}
+.step .node::before{content:"";position:absolute;inset:2px;background:var(--paper);clip-path:inherit;transition:background .4s}
+.step .node{background:var(--blue)}
+.step .node span{position:relative;font-family:var(--f-mono);font-size:.8rem;font-weight:500;color:var(--blue)}
+.step.on .node::before{background:var(--blue)}
+.step.on .node span{color:var(--white)}
+.step:last-child.on .node::before{background:var(--coral)}
+.step:last-child .node{background:var(--coral)}
+.step:last-child.on .node span{color:var(--navy)}
+.step small{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--deep)}
+.step h3{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:500}
+.step p{color:var(--ink-2);max-width:46ch}
+@media (max-width:899px){.process{grid-template-columns:1fr;gap:48px;padding-bottom:150px}.process .sec-head{position:static}}
+.process.staged{min-height:100vh;align-items:center;padding-block:96px}
+.process.staged .sec-head{position:static}
+.steps.stage{display:block;height:440px;padding-left:0;perspective:1200px;transform-style:preserve-3d}
+.steps.stage .rail{display:none}
+.steps.stage .step{position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;height:300px;width:min(540px,100%);padding:46px 48px 40px 112px;align-content:center;isolation:isolate;background:linear-gradient(135deg,var(--cyan),var(--blue));clip-path:polygon(30px 0,calc(100% - 30px) 0,100% 50%,calc(100% - 30px) 100%,30px 100%,0 50%);will-change:transform,opacity}
+.steps.stage .step::before{content:"";position:absolute;inset:2px;z-index:-1;background:var(--white);clip-path:polygon(29px 0,calc(100% - 29px) 0,100% 50%,calc(100% - 29px) 100%,29px 100%,0 50%)}
+.steps.stage .step:last-child{background:linear-gradient(135deg,var(--blue),var(--coral))}
+.steps.stage .node{left:44px;top:50%;margin-top:-20px}
+.steps.stage .step h3{font-size:2rem}
+.stage-count{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;color:var(--deep);margin-top:22px;display:none}
+.staged .stage-count{display:block}
+
+/* ---------- cases (cartões empilhados) ---------- */
+.cases{padding-block:72px 90px;display:grid;gap:44px}
+.stack{display:grid;gap:4vh;padding-bottom:6vh}
+.case{position:sticky;top:calc(88px + var(--i)*14px);height:min(72vh,620px);min-height:440px}
+.case-in{position:relative;height:100%;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(20px,3vw,44px);padding:clamp(22px,3vw,40px);background:var(--cbg);color:var(--cfg);clip-path:polygon(28px 0,100% 0,100% calc(100% - 28px),calc(100% - 28px) 100%,0 100%,0 28px);transform-origin:50% 0;will-change:transform}
+.case-dim{position:absolute;inset:0;background:#030915;opacity:0;pointer-events:none;z-index:3}
+.case-info{display:flex;flex-direction:column;gap:14px;min-width:0}
+.case-n{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.14em;opacity:.8}
+.case h3{font-family:var(--f-display);font-weight:600;font-size:clamp(1.9rem,3.6vw,3.3rem);line-height:1;letter-spacing:-.03em}
+.case-seg{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cac)}
+.case-desc{font-size:1rem;line-height:1.55;max-width:42ch;opacity:.92}
+.case .chips{margin-top:auto}
+.case .chips span{background:color-mix(in srgb,var(--cac) 18%,transparent);color:var(--cfg)}
+.shot{position:relative;min-width:0;height:100%;background:#000;border-radius:10px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.shot .bar{position:absolute;top:0;left:0;right:0;height:26px;z-index:2;display:flex;gap:6px;align-items:center;padding-inline:12px;background:rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+.shot .bar i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35)}
+.shot .bar em{margin-left:10px;font:400 .66rem var(--f-mono);font-style:normal;color:rgba(255,255,255,.7)}
+.scr{position:absolute;inset:0;overflow:hidden}
+.scr .px{position:absolute;will-change:transform}
+.art-t{position:absolute;left:7%;bottom:12%;max-width:62%;z-index:1}
+.art-t small{display:block;font:500 .66rem var(--f-mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;opacity:.9}
+.art-t b{display:block;font-weight:500;line-height:1.02}
+.art-btn{display:inline-block;margin-top:14px;padding:.6em 1.1em;font:600 .7rem var(--f-display);letter-spacing:.04em}
+.case-credit{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;color:var(--mist)}
+@media (max-width:899px){
+  .case{height:auto;min-height:0;top:calc(76px + var(--i)*10px)}
+  .case-in{grid-template-columns:1fr;clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px)}
+  .shot{height:auto;aspect-ratio:16/11;order:-1}
+  .case .chips{margin-top:4px}
+}
+/* ---------- projetos (legado) ---------- */
+.projects{padding-block:80px 180px;display:grid;gap:48px}
+.proj-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.proj{perspective:1000px;text-decoration:none}
+.proj-in{background:var(--abyss);border:1px solid var(--line-d);padding:18px;display:grid;gap:18px;transform-style:preserve-3d;height:100%}
+.mock{position:relative;aspect-ratio:16/10;max-width:100%;overflow:hidden;background:#0d2756}
+.mock .bar{position:absolute;top:0;left:0;right:0;height:22px;background:rgba(255,255,255,.07);display:flex;gap:5px;align-items:center;padding-inline:10px}
+.mock .bar i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.28)}
+.mock .bar em{margin-left:10px;font:400 .62rem var(--f-mono);font-style:normal;color:rgba(255,255,255,.5)}
+.mock .l{position:absolute;height:8px;background:rgba(255,255,255,.75)}
+.mock .l.s{height:5px;background:rgba(255,255,255,.3)}
+.mock .hx{position:absolute;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.mock .bt{position:absolute;height:14px;width:70px;background:var(--coral);clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 50%,calc(100% - 6px) 100%,6px 100%,0 50%)}
+.mock .phone{position:absolute;right:7%;bottom:-8%;width:22%;aspect-ratio:9/18;background:#071430;border:3px solid #24406f;border-radius:14px;overflow:hidden}
+.mock .chat{position:absolute;left:10%;right:10%;height:9%;border-radius:6px}
+.proj h3{font-size:1.25rem;font-weight:500;color:var(--paper)}
+.proj p{color:var(--mist);font-size:.92rem}
+.proj .seg{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.04em;padding:.42em .9em;background:rgba(0,194,231,.1);color:var(--cyan);clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 50%,calc(100% - 6px) 100%,6px 100%,0 50%)}
+.note{font-family:var(--f-mono);font-size:.72rem;color:var(--mist);letter-spacing:.04em}
+@media (max-width:760px){.proj-grid{grid-template-columns:1fr}}
+
+/* ---------- segmentos + faq ---------- */
+.seg-band{padding-block:72px 24px;display:grid;gap:36px}
+.marquee{display:grid;gap:12px;overflow:hidden;padding-block:6px}
+.mrow{display:flex;gap:12px;width:max-content;will-change:transform}
+.mrow span{font-family:var(--f-display);font-size:clamp(1.1rem,2.2vw,1.7rem);font-weight:500;padding:.6em 1.4em;background:var(--white);color:var(--ink);clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,16px 100%,0 50%);white-space:nowrap}
+.mrow span:nth-child(3n+2){background:var(--navy);color:var(--paper)}
+.mrow span:nth-child(5n+4){background:var(--cyan);color:var(--navy)}
+.seg-faq{padding-block:40px 120px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px}
+.seg-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.seg-list span{font-family:var(--f-display);font-size:.95rem;padding:.75em 1.3em;background:var(--white);color:var(--ink);position:relative;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);box-shadow:inset 0 0 0 1px var(--line-l)}
+.faq{display:grid;gap:0;border-top:1px solid var(--line-l)}
+.faq details{border-bottom:1px solid var(--line-l)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:22px 0;font-family:var(--f-display);font-size:1.12rem;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:22px;height:25px;background:var(--line-l);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);position:relative;transition:transform .5s cubic-bezier(.2,.8,.2,1),background .3s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;margin-top:-1px;background:var(--navy)}
+.faq summary i::after{transform:rotate(90deg);transition:transform .4s}
+.faq details[open] summary i{transform:rotate(180deg);background:var(--cyan)}
+.faq details[open] summary i::after{transform:rotate(0)}
+.faq .ans{padding:0 40px 24px 0;color:var(--ink-2);max-width:62ch}
+@media (max-width:899px){.seg-faq{grid-template-columns:1fr;gap:56px}}
+
+/* ---------- contato ---------- */
+.contact{padding-block:72px 110px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:end}
+.contact h2{font-size:clamp(2.3rem,5vw,4.4rem);line-height:1.02;font-weight:600;letter-spacing:-.03em}
+.contact-l{display:grid;gap:28px}
+.clist{display:grid;gap:0;border-top:1px solid var(--line-d);margin-top:8px}
+.crow{display:grid;grid-template-columns:7.5em minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line-d)}
+.crow small{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.crow span,.crow a{font-family:var(--f-display);font-size:1rem;overflow-wrap:anywhere;user-select:all;text-decoration:none}
+.crow a{user-select:auto}
+.crow a:hover{color:var(--cyan)}
+.copy{font:500 .7rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(0,194,231,.1);color:var(--cyan);border:0;padding:.6em .9em;cursor:pointer;clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 50%,calc(100% - 6px) 100%,6px 100%,0 50%)}
+.copy:hover{background:rgba(0,194,231,.22)}
+.map{background:rgba(8,23,51,.94);border:1px solid var(--line-d)}
+.map svg{display:block;width:100%;height:auto}
+.map-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px;border-top:1px solid var(--line-d);font-family:var(--f-mono);font-size:.72rem;color:var(--mist);letter-spacing:.06em}
+.contact-r{display:grid;gap:18px;align-content:end;min-height:660px}
+@media (max-width:899px){.contact{grid-template-columns:1fr;padding-top:calc(30vh)}.contact-r{min-height:0}.crow{grid-template-columns:1fr auto}.crow small{grid-column:1/-1}}
+
+/* ---------- footer ---------- */
+.foot{position:relative;z-index:1;background:var(--abyss);color:var(--mist);padding-block:56px calc(40px + env(safe-area-inset-bottom,0px));font-size:.9rem}
+.foot-in{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:36px}
+.foot .brand{color:var(--paper)}
+.foot h4{font:500 .7rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin:0 0 12px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot a{text-decoration:none}.foot a:hover{color:var(--paper)}
+.foot-base{margin-top:44px;padding-top:20px;border-top:1px solid var(--line-d);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em}
+@media (max-width:760px){.foot-in{grid-template-columns:1fr}}
+
+/* ---------- HUD de escala ---------- */
+.hud{position:fixed;right:max(12px,calc(var(--gutter)/2 - 10px));top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column-reverse;gap:14px;align-items:center;font-family:var(--f-mono);color:var(--mist);pointer-events:none;transition:color .4s}
+body.on-light .hud{color:var(--ink-2)}
+.hud-bar{width:2px;height:96px;background:currentColor;opacity:.3;position:relative}
+.hud-bar i{position:absolute;left:-4px;width:10px;height:11px;background:var(--cyan);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);bottom:0;transition:bottom .6s cubic-bezier(.2,.8,.2,1)}
+.hud>div:last-child{writing-mode:vertical-rl;transform:rotate(180deg);display:flex;gap:10px;align-items:center}
+.hud small{display:block;font-size:.6rem;letter-spacing:.18em;opacity:.7}
+.hud b{display:block;font-weight:500;font-size:.95rem;color:var(--cyan);letter-spacing:.02em}
+body.on-light .hud b{color:var(--deep)}
+.hud em{display:block;font-style:normal;font-size:.7rem;letter-spacing:.08em}
+@media (max-width:1279px){.hud{display:none}}
+
+/* ---------- WhatsApp flutuante ---------- */
+.wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;width:62px;height:70px;display:grid;place-items:center;background:linear-gradient(160deg,var(--cyan),var(--blue));color:var(--white);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);text-decoration:none}
+.wa-float svg{width:26px;height:26px}
+.wa-float::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.5);clip-path:inherit;animation:pulse 2.6s infinite;opacity:0}
+@keyframes pulse{0%{opacity:.6;transform:scale(.6)}70%,100%{opacity:0;transform:scale(1.05)}}
+.wa-float:focus-visible{outline:none;background:var(--cyan)}
+
+/* ---------- cursor ---------- */
+.cur,.cur-ring{position:fixed;top:0;left:0;z-index:100;pointer-events:none;display:none}
+.has-cursor .cur,.has-cursor .cur-ring{display:block}
+.cur{width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 2px rgba(11,31,68,.35)}
+.cur-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid var(--cyan);clip-path:none;border-radius:50%;transition:width .3s,height .3s,margin .3s,border-color .3s,opacity .3s;opacity:.7}
+.cur-ring.big{width:64px;height:64px;margin:-32px 0 0 -32px;border-color:var(--blue)}
+
+@media (prefers-reduced-motion:reduce){.wa-float::after{animation:none}*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<!-- defs compartilhados do logo -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00C2E7"/><stop offset="1" stop-color="#0288D1"/></linearGradient>
+    <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0288D1"/><stop offset="1" stop-color="#0066A8"/></linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0288D1"/><stop offset=".55" stop-color="#00C2E7"/><stop offset="1" stop-color="#FF8B61"/></linearGradient>
+    <symbol id="mark" viewBox="0 0 120 112">
+      <polygon points="60,13 78.2,23.5 78.2,44.5 60,55 41.8,44.5 41.8,23.5" fill="none" stroke="url(#gA)" stroke-width="7" stroke-linejoin="round"/>
+      <polygon points="39.2,49 57.4,59.5 57.4,80.5 39.2,91 21,80.5 21,59.5" fill="none" stroke="url(#gB)" stroke-width="7" stroke-linejoin="round"/>
+      <polygon points="80.8,49 99,59.5 99,80.5 80.8,91 62.6,80.5 62.6,59.5" fill="none" stroke="url(#gC)" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M60 13V4" stroke="#0288D1" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="4" r="4" fill="#FF8B61"/>
+      <path d="M60 24v8" stroke="#0066A8" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="35" r="3.6" fill="#0288D1"/>
+      <path d="M30 76l8-8h9" stroke="#0066A8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="78" r="3.6" fill="#0066A8"/>
+      <path d="M90 64l-8 8h-8" stroke="#00C2E7" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="92" cy="62" r="3.8" fill="#FF8B61"/>
+    </symbol>
+    <symbol id="ico-chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.6 3.8c-.5.4-1.4.1-1.4-.6V5.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 8.5h8M8 12h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="cur" aria-hidden="true"></div><div class="cur-ring" aria-hidden="true"></div>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#topo" aria-label="Tinano, início">
+      <svg aria-hidden="true"><use href="#mark"/></svg>
+      <span><b>Tinano</b><small>Nano Tecnologia da Informação</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#solucoes">Soluções</a><a href="#ecossistema">Ecossistema</a><a href="#processo">Processo</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a>
+    </nav>
+    <a class="btn btn-coral btn-sm magnetic" href="https://wa.me/5544988395181?text=Ol%C3%A1%2C%20Tinano!%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-chat"/></svg>WhatsApp</a>
+  </div>
+</header>
+
+<aside class="hud" aria-hidden="true">
+  <div class="hud-bar"><i id="hudMark"></i></div>
+  <div><small>ESCALA</small><b id="hudVal">10⁻⁹ m</b><em id="hudLbl">nó</em></div>
+</aside>
+
+<main>
+  <!-- HERO -->
+  <section class="sec clear" id="topo" data-tone="dark" data-scale="10⁻⁹ m|nó|0">
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <span class="eyebrow">Estúdio de tecnologia · Maringá/PR</span>
+        <h1 aria-label="Tecnologia em escala nano. Resultado em escala real.">
+          <span class="ln" aria-hidden="true"><span>Tecnologia em</span></span>
+          <span class="ln" aria-hidden="true"><span>escala nano<span class="dot">.</span></span></span>
+          <span class="ln" aria-hidden="true"><span>Resultado em</span></span>
+          <span class="ln" aria-hidden="true"><span class="hl">escala real<span class="dot">.</span></span></span>
+        </h1>
+        <p class="hero-sub">Sites, sistemas e automações com IA que trabalham juntos para o seu negócio vender mais e operar melhor.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-coral magnetic" href="https://wa.me/5544988395181?text=Ol%C3%A1%2C%20Tinano!%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Quero meu projeto <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-ghost magnetic" href="#solucoes">Ver soluções</a>
+        </div>
+        <div class="hero-foot"><span><i></i>Site capta</span><span><i></i>Sistema organiza</span><span><i></i>IA atende e cobra</span></div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 120 112" aria-hidden="true"><use href="#mark"/></svg>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="sec light" data-tone="light" data-scale="10⁻⁶ m|trilha|1">
+    <div class="seam" data-from="#0B1F44" data-to="#F5F8FC"><canvas></canvas></div>
+    <div class="wrap manifesto" id="manPin">
+      <div>
+      <span class="eyebrow">Manifesto</span>
+      <p id="manifesto">Todo negócio grande é feito de peças pequenas. Um *contato* que não se perde. Uma mensagem respondida às *23h.* Uma cobrança que sai no dia certo. A Tinano cuida dessas peças e *conecta* todas elas, para a sua empresa vender mais e depender menos do *improviso.*</p>
+      </div>
+      <div class="prism-wrap" aria-hidden="true"><div class="prism" id="prism"><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="cap" style="transform:rotateX(90deg) translateZ(150px)"></div><div class="cap" style="transform:rotateX(90deg) translateZ(-150px)"></div></div></div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÕES -->
+  <section class="sec light" id="solucoes" data-tone="light" data-scale="10⁻³ m|célula|2">
+    <div class="hive-pin">
+      <div class="wrap" style="width:100%">
+        <div class="sec-head">
+          <span class="eyebrow">Soluções</span>
+          <h2>Cada serviço é uma célula. Juntas, viram estrutura.</h2>
+          <p>Contrate uma peça ou o ecossistema inteiro. Tudo é feito sob medida e conversa entre si.</p>
+        </div>
+      </div>
+      <div class="hive-track" id="hive">
+        <article class="hcard" style="--i:0;--odd:0"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><path d="M8 21h8M12 17v4M7 9l3 2.5L7 14" stroke-linecap="round"/></svg>
+          <span class="tag">3D · SEO · Conversão</span><h3>Sites imersivos e landing pages</h3><p>Animação e 3D a serviço de uma coisa: virar contato.</p></div></div></article>
+        <article class="hcard" style="--i:1;--odd:1"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.5a1.5 1.5 0 0 1-1.5 1.5H7.7a1.5 1.5 0 0 1-1.5-1.5L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke-linecap="round"/></svg>
+          <span class="tag">Catálogo · Pedido</span><h3>Lojas com checkout no WhatsApp</h3><p>O cliente escolhe no site e o pedido chega pronto na sua conversa.</p></div></div></article>
+        <article class="hcard ink" style="--i:2;--odd:0"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="3" width="7.5" height="11" rx="1"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="17" width="7.5" height="4" rx="1"/></svg>
+          <span class="tag">CRM · Estoque · Financeiro</span><h3>Sistemas de gestão sob medida</h3><p>Clientes, vendas e caixa em um painel feito para a sua rotina.</p></div></div></article>
+        <article class="hcard" style="--i:3;--odd:1"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ico-chat"/></svg>
+          <span class="tag">WhatsApp · 24h</span><h3>Atendimento com IA</h3><p>Responde na hora, qualifica leads e agenda horários com o tom da sua marca.</p></div></div></article>
+        <article class="hcard" style="--i:4;--odd:0"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 2.5h12v19l-3-2-3 2-3-2-3 2v-19Z"/><path d="M9 8h6M9 12h6M9 16h3" stroke-linecap="round"/></svg>
+          <span class="tag">Cobrança · CS</span><h3>Cobrança e sucesso do cliente</h3><p>Lembretes, cobranças e acompanhamento automáticos, com histórico.</p></div></div></article>
+        <article class="hcard ink" style="--i:5;--odd:1"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="6.5" y="2" width="11" height="20" rx="2.2"/><path d="M10.5 18.5h3" stroke-linecap="round"/></svg>
+          <span class="tag">PWA · Portais</span><h3>Apps e áreas do cliente</h3><p>Comunidade, portal ou app interno que instala direto do navegador.</p></div></div></article>
+        <article class="hcard" style="--i:6;--odd:0"><div class="hface"><div class="hbody">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5 20.2 7.2v9.6L12 21.5 3.8 16.8V7.2L12 2.5Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="tag">Marca · Redes</span><h3>Identidade e presença digital</h3><p>Marca e materiais alinhados ao que o site entrega.</p></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSSISTEMA -->
+  <section class="sec dark" id="ecossistema" data-tone="dark" data-scale="10⁻² m|molécula|3">
+    <div class="seam" data-from="#F5F8FC" data-to="#0B1F44"><canvas></canvas></div>
+    <div class="wrap eco-pin" id="ecoPin">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">Ecossistema</span>
+          <h2>Três peças que se encaixam em um só sistema.</h2>
+        </div>
+        <ul class="eco-steps">
+          <li class="eco-step"><b>Site</b><h3>Capta</h3><p>Quem chega pelo Google ou pelo Instagram encontra uma página que convence e leva ao contato.</p></li>
+          <li class="eco-step"><b>Sistema</b><h3>Organiza</h3><p>Cada contato vira cliente cadastrado, com histórico, pedidos e financeiro no mesmo lugar.</p></li>
+          <li class="eco-step"><b>IA</b><h3>Atende e cobra</h3><p>O WhatsApp responde na hora, agenda, lembra e cobra, sempre ligado ao sistema.</p></li>
+        </ul>
+      </div>
+      <svg class="eco-svg" viewBox="0 0 600 440" role="img" aria-label="Três hexágonos, Site, Sistema e IA, encaixados e ligados por trilhas de circuito">
+        <defs>
+          <radialGradient id="core"><stop offset="0" stop-color="#FF8B61"/><stop offset=".45" stop-color="#FF8B61" stop-opacity=".45"/><stop offset="1" stop-color="#FF8B61" stop-opacity="0"/></radialGradient>
+        </defs>
+        <g transform="translate(300 140)"><g id="eA">
+          <polygon points="0,-105 90.9,-52.5 90.9,52.5 0,105 -90.9,52.5 -90.9,-52.5" fill="rgba(2,136,209,.14)" stroke="url(#gA)" stroke-width="3"/>
+          <text y="-6" text-anchor="middle" fill="#F5F8FC" font-family="Lexend, sans-serif" font-size="30" font-weight="600">Site</text>
+          <text y="22" text-anchor="middle" fill="#00C2E7" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">CAPTA</text>
+        </g></g>
+        <g transform="translate(209.1 297.5)"><g id="eB">
+          <polygon points="0,-105 90.9,-52.5 90.9,52.5 0,105 -90.9,52.5 -90.9,-52.5" fill="rgba(0,102,168,.18)" stroke="url(#gB)" stroke-width="3"/>
+          <text y="-6" text-anchor="middle" fill="#F5F8FC" font-family="Lexend, sans-serif" font-size="30" font-weight="600">Sistema</text>
+          <text y="22" text-anchor="middle" fill="#00C2E7" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">ORGANIZA</text>
+        </g></g>
+        <g transform="translate(390.9 297.5)"><g id="eC">
+          <polygon points="0,-105 90.9,-52.5 90.9,52.5 0,105 -90.9,52.5 -90.9,-52.5" fill="rgba(255,139,97,.1)" stroke="url(#gC)" stroke-width="3"/>
+          <text y="-6" text-anchor="middle" fill="#F5F8FC" font-family="Lexend, sans-serif" font-size="30" font-weight="600">IA</text>
+          <text y="22" text-anchor="middle" fill="#FF8B61" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">ATENDE E COBRA</text>
+        </g></g>
+        <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path class="eco-trace" d="M300 172V226" stroke="#00C2E7"/>
+          <path class="eco-trace" d="M236 268l22-22h28" stroke="#0288D1"/>
+          <path class="eco-trace" d="M364 268l-22-22h-28" stroke="#FF8B61"/>
+        </g>
+        <g fill="none" stroke-width="4" stroke-linecap="round" class="eco-flows" opacity="0">
+          <path class="eco-flow" d="M300 172V226" stroke="#F5F8FC"/>
+          <path class="eco-flow" d="M236 268l22-22h28" stroke="#F5F8FC"/>
+          <path class="eco-flow" d="M364 268l-22-22h-28" stroke="#FF8B61"/>
+        </g>
+        <g class="eco-core"><circle cx="300" cy="245" r="34" fill="url(#core)"/><circle cx="300" cy="245" r="8" fill="#FF8B61"/></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="sec light" id="processo" data-tone="light" data-scale="10⁰ m|sistema|4">
+    <div class="seam" data-from="#0B1F44" data-to="#F5F8FC"><canvas></canvas></div>
+    <div class="wrap process">
+      <div class="sec-head">
+        <span class="eyebrow">Processo</span>
+        <h2>Do diagnóstico à evolução, em quatro etapas.</h2>
+        <p>Você acompanha cada etapa e aprova o protótipo antes do desenvolvimento começar.</p>
+        <div class="stage-count" id="stageCount">ETAPA 1 / 4</div>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="rail" aria-hidden="true"><i id="railFill"></i></li>
+        <li class="step"><div class="node"><span>1</span></div><small>Etapa 1</small><h3>Diagnóstico</h3><p>Entendemos como a sua empresa vende hoje e onde o tempo e os clientes se perdem.</p></li>
+        <li class="step"><div class="node"><span>2</span></div><small>Etapa 2</small><h3>Protótipo</h3><p>Você navega pela proposta e aprova o caminho antes de qualquer código final.</p></li>
+        <li class="step"><div class="node"><span>3</span></div><small>Etapa 3</small><h3>Desenvolvimento</h3><p>Site, sistema e automações construídos e conectados entre si.</p></li>
+        <li class="step"><div class="node"><span>4</span></div><small>Etapa 4</small><h3>Evolução contínua</h3><p>Acompanhamos os resultados e ajustamos o que precisa melhorar.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section class="sec dark" id="projetos" data-tone="dark" data-scale="10³ m|rede|5">
+    <div class="seam" data-from="#F5F8FC" data-to="#0B1F44"><canvas></canvas></div>
+    <div class="wrap cases">
+      <div class="sec-head">
+        <span class="eyebrow">Cases</span>
+        <h2>Projetos que saíram da nossa bancada.</h2>
+        <p>Sites, sistemas e automações que a nossa rede já desenvolveu para empresas de segmentos diferentes, cada um com identidade própria.</p>
+      </div>
+      <div class="stack">
+        <article class="case" style="--i:0;--cbg:#070B14;--cfg:#F2F5FA;--cac:#4C8DFF"><div class="case-in">
+          <div class="case-info"><span class="case-n">01 / 07</span><h3>GWM Betral-e</h3><p class="case-seg">Concessionária GWM · Macapá/AP</p><p class="case-desc">Site imersivo para a concessionária GWM: vitrine 3D com as versões, cena do H6 GT e agendamento de test drive.</p><div class="chips"><span>Site imersivo</span><span>Vitrine 3D</span><span>Test drive</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>betral-e.com.br</em></div><div class="scr" style="background:radial-gradient(120% 80% at 70% 110%,#1b3f8f 0%,#0a1630 45%,#03060d 75%)">
+  <div class="px" style="left:-5%;right:-5%;top:58%;height:2px;background:linear-gradient(90deg,transparent,#4C8DFF,#cfe0ff,#4C8DFF,transparent);box-shadow:0 0 30px 6px rgba(76,141,255,.55)"></div>
+  <div class="px" style="right:-4%;top:14%;font:700 clamp(4rem,9vw,8.5rem)/.9 var(--f-display);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(207,224,255,.45)">H6 GT</div>
+  <svg class="px" viewBox="0 0 400 120" style="right:6%;top:40%;width:58%" aria-hidden="true"><path d="M20 92c10-24 40-30 70-34l50-22c30-12 90-14 130-2l50 18c22 6 48 10 58 26l2 14H20z" fill="#0b1326" stroke="#4C8DFF" stroke-width="2"/><circle cx="95" cy="94" r="20" fill="#03060d" stroke="#cfe0ff" stroke-width="3"/><circle cx="310" cy="94" r="20" fill="#03060d" stroke="#cfe0ff" stroke-width="3"/><path d="M150 40l30-12c30-8 70-8 100 2l18 10z" fill="rgba(76,141,255,.25)"/></svg>
+  <div class="art-t" style="color:#fff"><small style="color:#9fc0ff">Eletrificados GWM</small><b style="font:600 clamp(1rem,1.9vw,1.6rem)/1.05 var(--f-display)">Você nos leva<br>mais longe.</b><span class="art-btn" style="background:#4C8DFF;color:#fff">Agendar test drive</span></div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+        <article class="case" style="--i:1;--cbg:#0E0A06;--cfg:#F3EFE6;--cac:#C9A45E"><div class="case-in">
+          <div class="case-info"><span class="case-n">02 / 07</span><h3>Instituto da Face</h3><p class="case-seg">Odontologia e medicina avançada · Macapá/AP</p><p class="case-desc">Clínica de harmonização e odontologia. A seringa percorre a página e cada aplicação revela uma dobra, com comparador de antes e depois.</p><div class="chips"><span>Site imersivo</span><span>Antes e depois</span><span>Animação no scroll</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>institutodaface</em></div><div class="scr" style="background:#0A0705">
+  <div class="px" style="right:-18%;top:-10%;width:85%;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,rgba(201,164,94,.55) 0 1px,transparent 1px 22px);mask:radial-gradient(circle,#000 30%,transparent 70%);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%)"></div>
+  <div class="px" style="right:22%;top:28%;width:14px;height:14px;border-radius:50%;background:#e6c88a;box-shadow:0 0 30px 10px rgba(201,164,94,.5)"></div>
+  <div class="art-t" style="color:#F3EFE6"><small style="color:#C9A45E">Instituto da Face</small><b style="font:italic 500 clamp(1.4rem,2.8vw,2.5rem)/1.02 'Cormorant Garamond',Georgia,serif">Sua melhor versão começa com uma decisão.</b><span class="art-btn" style="border:1px solid #C9A45E;color:#C9A45E">Agendar avaliação</span></div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+        <article class="case" style="--i:2;--cbg:#F3EEE6;--cfg:#2A2117;--cac:#8C764A"><div class="case-in">
+          <div class="case-info"><span class="case-n">03 / 07</span><h3>Dra. Luana Thalita</h3><p class="case-seg">Estética avançada · Macapá/AP</p><p class="case-desc">Biomédica esteta. Transições de antes e depois com os casos reais da clínica e agendamento em um toque.</p><div class="chips"><span>Site imersivo</span><span>Antes e depois</span><span>Agendamento</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>lt_estetic</em></div><div class="scr" style="background:linear-gradient(160deg,#fbf7f1,#ece2d3)">
+  <div class="px" style="left:50%;top:12%;bottom:0;width:44%;background:linear-gradient(180deg,#e2d2bc,#cdb595)"></div>
+  <div class="px" style="left:72%;top:12%;bottom:0;width:22%;background:linear-gradient(180deg,#d9c3a3,#b89a72)"></div>
+  <div class="px" style="left:72%;top:12%;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(140,118,74,.4)"></div>
+  <div class="px" style="left:calc(72% - 15px);top:52%;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2)"></div>
+  <div class="px" style="left:7%;top:16%;font:500 clamp(3.4rem,7vw,6rem)/1 'Cormorant Garamond',Georgia,serif;color:#B9975B">LT</div>
+  <div class="art-t" style="color:#2A2117;max-width:40%"><small style="color:#8C764A">Estética avançada</small><b style="font:italic 500 clamp(1.3rem,2.4vw,2.1rem)/1.05 'Cormorant Garamond',Georgia,serif">O seu resultado, com naturalidade.</b></div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+        <article class="case" style="--i:3;--cbg:#0F0820;--cfg:#F1ECFF;--cac:#A78BFA"><div class="case-in">
+          <div class="case-info"><span class="case-n">04 / 07</span><h3>TOT LAB IA</h3><p class="case-seg">Laboratório de inteligência artificial · Macapá/AP</p><p class="case-desc">Laboratório de IA. Experiência futurista com objetos 3D que reagem ao scroll e ao mouse, parallax e transições entre capítulos.</p><div class="chips"><span>Site imersivo</span><span>3D no scroll</span><span>Parallax</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>totlabia</em></div><div class="scr" style="background:radial-gradient(90% 90% at 75% 40%,#3b1d7a 0%,#140a2e 50%,#07030f 100%)">
+  <div class="px" style="inset:0;background-image:linear-gradient(rgba(167,139,250,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(167,139,250,.12) 1px,transparent 1px);background-size:32px 32px;mask:radial-gradient(circle at 75% 40%,#000,transparent 70%);-webkit-mask:radial-gradient(circle at 75% 40%,#000,transparent 70%)"></div>
+  <div class="px" style="right:12%;top:16%;width:38%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(196,181,253,.7);box-shadow:0 0 60px rgba(139,92,246,.6),inset 0 0 40px rgba(139,92,246,.5)"></div>
+  <div class="px" style="right:21%;top:30%;width:20%;aspect-ratio:1;background:linear-gradient(135deg,#c4b5fd,#7c3aed);clip-path:polygon(20% 0,80% 0,100% 20%,100% 80%,80% 100%,20% 100%,0 80%,0 20%)"></div>
+  <div class="art-t" style="color:#F1ECFF"><small style="color:#C4B5FD">TOT LAB IA</small><b style="font:600 clamp(1.2rem,2.3vw,2rem)/1.05 var(--f-display)">Inteligência artificial<br>aplicada ao seu negócio.</b></div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+        <article class="case" style="--i:4;--cbg:#111111;--cfg:#F5F5F5;--cac:#E8E8E8"><div class="case-in">
+          <div class="case-info"><span class="case-n">05 / 07</span><h3>Hyper Marketing Digital</h3><p class="case-seg">Agência de marketing · Macapá/AP</p><p class="case-desc">Portfólio da agência, com a dobra de fotografia nascendo de dentro da lente de uma câmera profissional.</p><div class="chips"><span>Portfólio</span><span>Fotografia</span><span>Transições 3D</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>hyper_agencia</em></div><div class="scr" style="background:#0a0a0a">
+  <div class="px" style="right:6%;top:10%;width:52%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#1c2a3c 0 18%,#05070a 19% 30%,#2b2b2b 31% 33%,#0c0c0c 34% 52%,#3a3a3a 53% 54%,#111 55% 70%,#2a2a2a 71% 72%,#0a0a0a 73%)"></div>
+  <div class="px" style="right:24%;top:26%;width:9%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.9),rgba(140,190,255,.2) 60%,transparent 70%)"></div>
+  <div class="art-t" style="color:#fff"><small style="color:#bbb">Hyper Marketing Digital</small><b style="font:700 clamp(1.3rem,2.6vw,2.3rem)/.98 var(--f-display);letter-spacing:-.03em">Imagem que<br>vende.</b></div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+        <article class="case" style="--i:5;--cbg:#140C05;--cfg:#F6EBDD;--cac:#D9A55B"><div class="case-in">
+          <div class="case-info"><span class="case-n">06 / 07</span><h3>Sedução Árabe</h3><p class="case-seg">Perfumaria árabe · Macapá e Santana/AP</p><p class="case-desc">Vitrine de luxo com carrinho que fecha o pedido no WhatsApp, ligada ao Mizan, o sistema de gestão das duas lojas.</p><div class="chips"><span>Loja + WhatsApp</span><span>Sistema de gestão</span><span>Automação</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>seducaoarabe</em></div><div class="scr" style="background:radial-gradient(80% 90% at 70% 60%,#4a2a0c 0%,#1a0f05 55%,#0b0603 100%)">
+  <div class="px" style="inset:0;opacity:.28;background:repeating-conic-gradient(from 45deg,rgba(217,165,91,.5) 0 25%,transparent 0 50%) 0 0/36px 36px;mask:radial-gradient(circle at 70% 55%,#000,transparent 65%);-webkit-mask:radial-gradient(circle at 70% 55%,#000,transparent 65%)"></div>
+  <div class="px" style="right:20%;top:30%;width:18%;height:52%;border-radius:22% 22% 14% 14%;background:linear-gradient(110deg,#5a3410,#e0a85a 45%,#7a4a16 70%,#3a2008);box-shadow:0 30px 60px rgba(0,0,0,.6)"></div>
+  <div class="px" style="right:25%;top:18%;width:8%;height:14%;border-radius:6px 6px 2px 2px;background:linear-gradient(90deg,#8a6a2a,#f4d58a,#8a6a2a)"></div>
+  <div class="art-t" style="color:#F6EBDD"><small style="color:#D9A55B">Sedução Árabe · ٠١</small><b style="font:italic 500 clamp(1.4rem,2.7vw,2.4rem)/1.02 'Cormorant Garamond',Georgia,serif">Fragrâncias que<br>contam histórias.</b><span class="art-btn" style="background:#D9A55B;color:#140C05">Comprar pelo WhatsApp</span></div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+        <article class="case" style="--i:6;--cbg:#0B1F44;--cfg:#F5F8FC;--cac:#00C2E7"><div class="case-in">
+          <div class="case-info"><span class="case-n">07 / 07</span><h3>Amazoom Coworking</h3><p class="case-seg">Coworking · Macapá/AP</p><p class="case-desc">Automação de sucesso do cliente e cobrança pelo WhatsApp com IA, em operação com os clientes do coworking.</p><div class="chips"><span>IA no WhatsApp</span><span>Cobrança</span><span>Sucesso do cliente</span></div></div>
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>painel / cobrança</em></div><div class="scr" style="background:linear-gradient(160deg,#0d2756,#071430)">
+  <div class="px" style="left:6%;top:16%;width:52%;display:grid;gap:10px">
+    <div style="height:62px;background:rgba(0,194,231,.14);display:flex;align-items:center;gap:10px;padding:0 14px;font:500 .7rem var(--f-mono);color:#BFEFFA"><b style="font:600 1.1rem var(--f-display);color:#fff">Cobrança</b>lembrete enviado · vence amanhã</div>
+    <div style="height:62px;background:rgba(2,136,209,.2);display:flex;align-items:center;gap:10px;padding:0 14px;font:500 .7rem var(--f-mono);color:#BFEFFA"><b style="font:600 1.1rem var(--f-display);color:#fff">IA</b>atendimento a qualquer hora</div>
+    <div style="height:40px;background:rgba(255,255,255,.06)"></div>
+  </div>
+  <div class="px" style="right:8%;top:12%;width:26%;height:100%;background:#050d1f;border:3px solid #24406f;border-radius:22px;padding:28px 10px;display:grid;gap:8px;align-content:start">
+    <div style="height:30px;border-radius:10px 10px 10px 2px;background:rgba(255,255,255,.14);width:80%"></div>
+    <div style="height:42px;border-radius:10px 10px 2px 10px;background:#00C2E7;width:85%;justify-self:end"></div>
+    <div style="height:30px;border-radius:10px 10px 10px 2px;background:rgba(255,255,255,.14);width:70%"></div>
+    <div style="height:30px;border-radius:10px 10px 2px 10px;background:#0288D1;width:75%;justify-self:end"></div>
+  </div></div></div>
+          <div class="case-dim"></div>
+        </div></article>
+      </div>
+      <p class="case-credit">Projetos desenvolvidos em parceria com o estúdio PRUMO · Macapá/AP</p>
+    </div>
+  </section>
+
+  <!-- SEGMENTOS + FAQ -->
+  <section class="sec light" id="faq" data-tone="light" data-scale="10⁴ m|mercado|6">
+    <div class="seam" data-from="#0B1F44" data-to="#F5F8FC"><canvas></canvas></div>
+    <div class="seg-band">
+      <div class="wrap"><div class="sec-head">
+        <span class="eyebrow">Segmentos</span>
+        <h2>Para quem a gente constrói.</h2>
+        <p>Atendemos de Maringá para todo o Brasil, com reuniões online e acompanhamento por WhatsApp.</p>
+      </div></div>
+      <div class="marquee" aria-label="Clínicas e saúde, estética, advocacia, contabilidade, concessionárias, coworkings, comércio e varejo, turismo, imobiliárias, academias, restaurantes e serviços em geral">
+        <div class="mrow" id="mr1" aria-hidden="true"><span>Clínicas e saúde</span><span>Estética</span><span>Advocacia</span><span>Contabilidade</span><span>Concessionárias</span><span>Coworkings</span><span>Clínicas e saúde</span><span>Estética</span><span>Advocacia</span><span>Contabilidade</span><span>Concessionárias</span><span>Coworkings</span></div>
+        <div class="mrow" id="mr2" aria-hidden="true"><span>Comércio e varejo</span><span>Turismo</span><span>Imobiliárias</span><span>Academias</span><span>Restaurantes</span><span>Serviços em geral</span><span>Comércio e varejo</span><span>Turismo</span><span>Imobiliárias</span><span>Academias</span><span>Restaurantes</span><span>Serviços em geral</span></div>
+      </div>
+    </div>
+    <div class="wrap seg-faq">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">Dúvidas</span>
+          <h2>Perguntas que sempre aparecem.</h2>
+          <p>Se a sua não estiver aqui, chame no WhatsApp.</p>
+        </div>
+      </div>
+      <div>
+        <div class="faq">
+          <details open><summary>Posso começar só com o site?<i aria-hidden="true"></i></summary><p class="ans">Pode. Cada módulo funciona sozinho e foi pensado para se conectar aos outros depois, sem refazer o que já existe.</p></details>
+          <details><summary>A IA vai responder como a minha empresa?<i aria-hidden="true"></i></summary><p class="ans">Ela aprende com as informações do seu negócio: serviços, preços, horários e jeito de falar. Quando a conversa pede uma pessoa, ela passa o atendimento para a sua equipe.</p></details>
+          <details><summary>Quanto tempo leva um projeto?<i aria-hidden="true"></i></summary><p class="ans">Depende do escopo. No diagnóstico definimos o prazo de cada etapa, e você acompanha o protótipo antes do desenvolvimento.</p></details>
+          <details><summary>Vocês atendem fora de Maringá?<i aria-hidden="true"></i></summary><p class="ans">Sim. A base é em Maringá/PR e o atendimento é remoto para todo o Brasil.</p></details>
+          <details><summary>E depois da entrega?<i aria-hidden="true"></i></summary><p class="ans">Seguimos juntos na etapa de evolução contínua: ajustes, novas funções e acompanhamento dos resultados.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="sec clear" id="contato" data-tone="dark" data-scale="Maringá|seu negócio|7">
+    <div class="seam" data-from="#F5F8FC" data-to="#0B1F44"><canvas></canvas></div>
+    <div class="wrap contact">
+      <div class="contact-l">
+        <span class="eyebrow">Contato</span>
+        <h2>Vamos conectar o seu negócio<span class="dot">?</span></h2>
+        <p class="hero-sub">Conte o que a sua empresa precisa. A gente responde pelo WhatsApp e marca o diagnóstico.</p>
+        <div><a class="btn btn-coral magnetic" href="https://wa.me/5544988395181?text=Ol%C3%A1%2C%20Tinano!%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-chat"/></svg>Chamar no WhatsApp</a></div>
+        <div class="clist">
+          <div class="crow"><small>WhatsApp</small><span id="cPhone">(44) 98839-5181</span><button class="copy" type="button" data-copy="cPhone">Copiar</button></div>
+          <div class="crow"><small>E-mail</small><span id="cMail">contato@tinano.com.br</span><button class="copy" type="button" data-copy="cMail">Copiar</button></div>
+          <div class="crow"><small>Endereço</small><span id="cAddr">Rua Darville Antônio Huergo, 2547 · CEP 87083-604 · Maringá/PR</span><button class="copy" type="button" data-copy="cAddr">Copiar</button></div>
+          <div class="crow"><small>Redes</small><a href="https://www.instagram.com/tinano.com.br/" target="_blank" rel="noopener">Instagram @tinano.com.br</a><a href="https://www.facebook.com/share/1Js2pGuy89/" target="_blank" rel="noopener" style="font-size:.9rem;color:var(--mist)">Facebook</a></div>
+        </div>
+      </div>
+      <div class="contact-r">
+        <div class="map">
+          <svg viewBox="0 0 520 260" role="img" aria-label="Mapa estilizado marcando Maringá, Paraná">
+            <defs>
+              <pattern id="hexp" width="34.64" height="60" patternUnits="userSpaceOnUse">
+                <path d="M17.32 0 34.64 10V30L17.32 40 0 30V10Z M17.32 40V60" fill="none" stroke="rgba(0,194,231,.16)" stroke-width="1"/>
+              </pattern>
+              <radialGradient id="mglow"><stop offset="0" stop-color="#00C2E7" stop-opacity=".35"/><stop offset="1" stop-color="#00C2E7" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="520" height="260" fill="url(#hexp)"/>
+            <circle cx="260" cy="130" r="120" fill="url(#mglow)"/>
+            <path d="M40 210 L130 168 L190 172 L260 130 L330 96 L410 104 L490 60" fill="none" stroke="#0288D1" stroke-width="2" stroke-dasharray="4 6"/>
+            <path d="M80 40 L170 92 L260 130 L320 190 L420 220" fill="none" stroke="rgba(0,194,231,.5)" stroke-width="1.5"/>
+            <circle cx="130" cy="168" r="3.5" fill="#0288D1"/><circle cx="410" cy="104" r="3.5" fill="#0288D1"/><circle cx="170" cy="92" r="3" fill="#00C2E7"/><circle cx="320" cy="190" r="3" fill="#00C2E7"/>
+            <circle class="map-pulse" cx="260" cy="130" r="9" fill="none" stroke="#FF8B61" stroke-width="2"/>
+            <circle cx="260" cy="130" r="7" fill="#FF8B61"/>
+            <text x="276" y="124" fill="#F5F8FC" font-family="Lexend, sans-serif" font-size="17" font-weight="600">Maringá · PR</text>
+            <text x="276" y="144" fill="#A9BCD8" font-family="JetBrains Mono, monospace" font-size="11">23°25′S · 51°56′W</text>
+          </svg>
+          <div class="map-cap"><span>Base Maringá/PR</span><span>Atendimento remoto em todo o Brasil</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <div style="display:grid;gap:14px;align-content:start">
+        <a class="brand" href="#topo"><svg aria-hidden="true"><use href="#mark"/></svg><span><b>Tinano</b><small>Nano Tecnologia da Informação</small></span></a>
+        <p style="max-width:34ch">Sites, sistemas e automações com IA para empresas que querem vender mais e operar melhor.</p>
+      </div>
+      <div><h4>Contato</h4><ul><li>(44) 98839-5181</li><li>contato@tinano.com.br</li><li>Rua Darville Antônio Huergo, 2547</li><li>CEP 87083-604 · Maringá/PR</li></ul></div>
+      <div><h4>Navegue</h4><ul><li><a href="#solucoes">Soluções</a></li><li><a href="#ecossistema">Ecossistema</a></li><li><a href="#processo">Processo</a></li><li><a href="https://www.instagram.com/tinano.com.br/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/share/1Js2pGuy89/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Tinano · Nano Tecnologia da Informação</span><span>Maringá · Paraná · Brasil</span></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5544988395181?text=Ol%C3%A1%2C%20Tinano!%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener" aria-label="Conversar com a Tinano no WhatsApp"><svg aria-hidden="true"><use href="#ico-chat"/></svg></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine=matchMedia('(pointer: fine)').matches;
+const G=!!(window.gsap&&window.ScrollTrigger);
+if(G) gsap.registerPlugin(ScrollTrigger); else document.documentElement.classList.add('no-gsap');
+const M={fast:.25,normal:.6,slow:1.2,out:'power3.out',inOut:'power3.inOut',drama:'expo.out'};
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const smooth=(a,b,v)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t)};
+
+/* ---------- manifesto: palavras ---------- */
+const man=$('#manifesto');
+if(man){man.innerHTML=man.textContent.trim().split(/\s+/).map(w=>{const k=w.startsWith('*');w=w.replace(/\*/g,'');return '<span class="w'+(k?' k':'')+'">'+w+'</span>'}).join(' ')}
+
+/* ---------- prisma hexagonal (CSS 3D) ---------- */
+const prism=$('#prism');
+if(prism){
+  $$('.f',prism).forEach((f,i)=>f.style.transform='rotateY('+(i*60)+'deg) translateZ(138.6px)');
+  $$('.cap',prism).forEach((c,i)=>c.style.cssText='left:-80px;top:11.5px;width:320px;height:277px;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);transform:rotateX(90deg) translateZ('+(i?-150:150)+'px)');
+}
+
+/* ---------- header ---------- */
+const hdr=$('#hdr');
+const onScrollHdr=()=>hdr.classList.toggle('scrolled',scrollY>40);
+addEventListener('scroll',onScrollHdr,{passive:true});onScrollHdr();
+
+/* ---------- copiar ---------- */
+$$('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copy),txt=el.textContent.trim();
+  const done=()=>{b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1600)};
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecionado';setTimeout(()=>b.textContent='Copiar',1600)};
+  try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+}));
+
+/* ================= 3D ================= */
+const gl={heroP:0,contactP:0,intro:0,split:0,mx:0,my:0,visible:true,ready:false};
+function initGL(){
+  if(!window.THREE){document.body.classList.add('no-webgl');return false}
+  const canvas=$('#gl');let renderer=null;
+  try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'})}catch(e){}
+  if(!renderer||!renderer.getContext()){document.body.classList.add('no-webgl');canvas.style.display='none';return false}
+  const mobile=innerWidth<900;
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile?1.4:1.75));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(35,innerWidth/innerHeight,.05,120);
+  camera.position.set(0,0,9);
+
+  scene.add(new THREE.AmbientLight(0x7fb2e0,.55));
+  const key=new THREE.DirectionalLight(0xffffff,1.25);key.position.set(3,5,6);scene.add(key);
+  const rim=new THREE.PointLight(0x00C2E7,2.4,30);rim.position.set(-4,-2,3.5);scene.add(rim);
+  const warm=new THREE.PointLight(0xFF8B61,1.7,30);warm.position.set(4.5,-3,2.5);scene.add(warm);
+
+  const hexShape=r=>{const s=new THREE.Shape();for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-90),x=Math.cos(a)*r,y=Math.sin(a)*r;i?s.lineTo(x,y):s.moveTo(x,y)}s.closePath();return s};
+  const ring=hexShape(1);ring.holes.push(hexShape(.74));
+  const geo=new THREE.ExtrudeGeometry(ring,{depth:.3,bevelEnabled:true,bevelThickness:.07,bevelSize:.06,bevelSegments:4,curveSegments:1});
+  geo.center();
+  const FZ=.22;
+  const geoC=geo.clone();
+  {const pos=geoC.attributes.position,cols=[],cA=new THREE.Color(0x0288D1),cB=new THREE.Color(0x00C2E7),cC=new THREE.Color(0xFF8B61),tmp=new THREE.Color();
+   for(let i=0;i<pos.count;i++){let t=clamp((pos.getX(i)*.75-pos.getY(i)*.45+1)/2);if(t<.5)tmp.copy(cA).lerp(cB,t*2);else tmp.copy(cB).lerp(cC,(t-.5)*2);cols.push(tmp.r,tmp.g,tmp.b)}
+   geoC.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));}
+
+  const phys=o=>new THREE.MeshPhysicalMaterial(Object.assign({metalness:.35,roughness:.24,clearcoat:1,clearcoatRoughness:.12},o));
+  const mats=[phys({color:0x0aa3e0}),phys({color:0x0066A8}),phys({color:0xffffff,vertexColors:true})];
+  const nodeMat=new THREE.MeshStandardMaterial({color:0x00C2E7,emissive:0x00C2E7,emissiveIntensity:.9,roughness:.3});
+  const coralMat=new THREE.MeshStandardMaterial({color:0xFF8B61,emissive:0xFF8B61,emissiveIntensity:1.1,roughness:.3});
+  const traceMat=new THREE.MeshStandardMaterial({color:0x7fd8f0,emissive:0x0288D1,emissiveIntensity:.5,metalness:.5,roughness:.3});
+  const sph=new THREE.SphereGeometry(1,24,18);
+  const V=(x,y,z=FZ)=>new THREE.Vector3(x,y,z);
+  const stick=(a,b,r,mat)=>{const d=new THREE.Vector3().subVectors(b,a),len=d.length(),m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,8),mat);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());return m};
+  const node=(p,r,mat)=>{const m=new THREE.Mesh(sph,mat);m.scale.setScalar(r);m.position.copy(p);return m};
+
+  const R=1.02,bases=[V(0,R,0),V(-R*.866,-R*.5,0),V(R*.866,-R*.5,0)],zoff=[0,.14,-.14];
+  const molecule=new THREE.Group();scene.add(molecule);
+  let topNode=null;
+  const hexes=bases.map((b,i)=>{
+    const g=new THREE.Group();g.add(new THREE.Mesh(i===2?geoC:geo,mats[i]));
+    if(i===0){g.add(stick(V(0,.73),V(0,.2),.035,traceMat));g.add(node(V(0,.12),.1,nodeMat));g.add(stick(V(0,1.05,0),V(0,1.5,0),.04,traceMat));topNode=node(V(0,1.58,0),.13,coralMat);g.add(topNode)}
+    if(i===1){g.add(stick(V(-.55,-.32),V(-.22,0),.035,traceMat));g.add(stick(V(-.22,0),V(.22,0),.035,traceMat));g.add(node(V(-.6,-.36),.1,nodeMat))}
+    if(i===2){g.add(stick(V(.55,.32),V(.22,0),.035,traceMat));g.add(stick(V(.22,0),V(-.2,0),.035,traceMat));g.add(node(V(.6,.36),.11,coralMat))}
+    g.position.copy(b);g.position.z=zoff[i];molecule.add(g);
+    const dir=b.clone().normalize();dir.z=(i-1)*.7;
+    return{g,base:g.position.clone(),dir,w:i===0?0:1};
+  });
+  const pulse=node(V(0,0),.07,coralMat);hexes[2].g.add(pulse);
+  const ringPts=[];for(let i=0;i<=6;i++){const a=Math.PI/180*(60*i-90);ringPts.push(new THREE.Vector3(Math.cos(a)*.87,Math.sin(a)*.87,FZ+.02))}
+  const onRing=t=>{const s=t*6,k=Math.min(5,Math.floor(s));return ringPts[k].clone().lerp(ringPts[k+1],s-k)};
+
+  /* colmeia de fundo (macro) com onda de luz */
+  const latShape=hexShape(.5);latShape.holes.push(hexShape(.455));
+  const latGeo2=new THREE.ShapeGeometry(latShape);
+  const COLS=mobile?18:34,ROWS=mobile?26:20,COUNT=COLS*ROWS;
+  const latMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+  const lat=new THREE.InstancedMesh(latGeo2,latMat,COUNT);lat.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  const cells=[],dummy=new THREE.Object3D(),col=new THREE.Color(),cCy=new THREE.Color(0x00C2E7),cCo=new THREE.Color(0xFF8B61);
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){cells.push({x:(c-COLS/2)*.9+(r%2?.45:0),y:(r-ROWS/2)*.78,rnd:Math.random()})}
+  cells.forEach((c,i)=>{dummy.position.set(c.x,c.y,-7);dummy.updateMatrix();lat.setMatrixAt(i,dummy.matrix);lat.setColorAt(i,col.setRGB(0,0,0))});
+  scene.add(lat);
+
+  /* poeira */
+  const N=mobile?140:260,pp=new Float32Array(N*3);
+  for(let i=0;i<N;i++){const r=2+Math.random()*7,th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1);pp[i*3]=r*Math.sin(ph)*Math.cos(th);pp[i*3+1]=r*Math.sin(ph)*Math.sin(th)*.7;pp[i*3+2]=r*Math.cos(ph)-1}
+  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+  const dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0x00C2E7,size:.03,transparent:true,opacity:.55,depthWrite:false}));scene.add(dust);
+
+  const L={x:0,y:0,s:1,cy:0,cs:0};
+  function resize(){const w=innerWidth,h=innerHeight,wide=w>=900;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+    L.x=wide?Math.min(2.6,1.15+w/1400):0;L.y=wide?-.05:1.4;L.s=wide?1:.5;L.cy=wide?1.05:0;L.cs=wide?.4:0}
+  resize();addEventListener('resize',resize);
+  if(fine)addEventListener('pointermove',e=>{gl.mx=e.clientX/innerWidth*2-1;gl.my=e.clientY/innerHeight*2-1},{passive:true});
+
+  const clock=new THREE.Clock(),Aw=new THREE.Vector3(),Nw=new THREE.Vector3(),camPos=new THREE.Vector3(),look=new THREE.Vector3(),tmpV=new THREE.Vector3();
+  const DEF=new THREE.Vector3(0,0,9),ORI=new THREE.Vector3(0,0,0);
+  let rx=0,ry=0;
+  (function tick(){
+    requestAnimationFrame(tick);
+    if(!gl.visible)return;
+    const t=clock.getElapsedTime();
+    const hp=reduce?0:gl.heroP*(1-gl.contactP);   // voo pela molécula
+    const it=gl.intro;                              // 1 = câmera colada no nó
+    const target=Math.max(hp*1.15,it*1.4);
+    gl.split+=(target-gl.split)*.09;const s=gl.split;
+    hexes.forEach((h,i)=>{
+      h.g.position.set(h.base.x+h.dir.x*s*2.3*h.w,h.base.y+h.dir.y*s*2.3*h.w,h.base.z+h.dir.z*s*2.6*h.w);
+      h.g.rotation.set(s*h.dir.y*1.4*h.w,s*h.dir.x*1.8*h.w,s*(i-1)*.9*h.w+(reduce?0:Math.sin(t*.6+i)*.03));
+    });
+    const f1=smooth(0,.72,hp),f2=smooth(.55,1,hp);
+    rx+=((gl.my*.28)-rx)*.05;ry+=((gl.mx*.45)-ry)*.05;
+    const calm=(1-f1)*(1-it);
+    molecule.rotation.x=(rx+(reduce?0:Math.sin(t*.35)*.08))*calm;
+    molecule.rotation.y=(ry+(reduce?0:Math.sin(t*.25)*.25))*calm;
+    molecule.position.set(L.x,L.y+(reduce?0:Math.sin(t*.8)*.06)*calm+gl.contactP*L.cy,0);
+    molecule.scale.setScalar(L.s*(1-gl.contactP*L.cs));
+    molecule.updateMatrixWorld(true);
+    hexes[0].g.getWorldPosition(Aw);topNode.getWorldPosition(Nw);
+    // câmera: padrão -> aproxima do hexágono superior -> atravessa o anel
+    camPos.copy(DEF).lerp(tmpV.copy(Aw).add(V(0,0,2.4)),f1).lerp(tmpV.copy(Aw).add(V(0,0,-2.6)),f2);
+    look.copy(ORI).lerp(Aw,f1).lerp(tmpV.copy(Aw).add(V(0,0,-8)),f2);
+    if(it>0){const e=it*it;camPos.lerp(tmpV.copy(Nw).add(V(.08,.05,.95)),e);look.lerp(Nw,e)}
+    camera.position.copy(camPos);camera.lookAt(look);
+    // colmeia de fundo: onda que nasce na molécula
+    const ox=L.x*1.6,oy=L.y*1.6,lop=latMat.opacity;
+    if(lop>.01){
+      for(let i=0;i<COUNT;i++){const c=cells[i],d=Math.hypot(c.x-ox,c.y-oy),w=Math.sin(d*.55-t*1.5);
+        dummy.position.set(c.x,c.y,-7+w*.28-hp*2.5);dummy.rotation.z=0;dummy.updateMatrix();lat.setMatrixAt(i,dummy.matrix);
+        const pk=Math.pow(Math.max(0,w),8),k=.05+pk*.55;
+        if(c.rnd>.985&&pk>.5)col.copy(cCo).multiplyScalar(k*1.4);else col.copy(cCy).multiplyScalar(k);
+        lat.setColorAt(i,col)}
+      lat.instanceMatrix.needsUpdate=true;lat.instanceColor.needsUpdate=true;
+    }
+    dust.rotation.y=t*.02;dust.rotation.x=Math.sin(t*.1)*.05;
+    const cyc=(t%3.6)/1.6;
+    if(cyc<=1&&!reduce){pulse.visible=true;pulse.position.copy(onRing(cyc))}else pulse.visible=false;
+    renderer.render(scene,camera);
+  })();
+  gl.latMat=latMat;gl.ready=true;
+  return true;
+}
+const hasGL=initGL();
+
+const heroEl=$('#topo'),contactEl=$('#contato');
+function glVis(){gl.visible=heroEl.getBoundingClientRect().bottom>-40||contactEl.getBoundingClientRect().top<innerHeight+40}
+addEventListener('scroll',glVis,{passive:true});glVis();
+
+/* ---------- transição: a colmeia engole a dobra anterior ---------- */
+function seam(el){
+  const cv=el.querySelector('canvas'),ctx=cv.getContext('2d'),to=el.dataset.to;
+  let w=0,h=0,cells=[],last=-1,state='';
+  const hex=(x,y,r,sx,rot)=>{ctx.beginPath();for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-90)+rot,px=Math.cos(a)*r*sx,py=Math.sin(a)*r;const X=x+px,Y=y+py;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()};
+  const draw=p=>{
+    last=p;if(!w)return;
+    if(p<=0){if(state!=='empty'){ctx.clearRect(0,0,w,h);state='empty'}return}
+    if(p>=.995){if(state!=='full'){ctx.fillStyle=to;ctx.fillRect(0,0,w,h);state='full'}return}
+    state='mid';ctx.clearRect(0,0,w,h);
+    const H=innerHeight,top=H*(1-p)-h,front=H*(1-p)-H*.42*p;   // a colmeia avança à frente da nova dobra
+    for(const c of cells){
+      const vy=top+c.y;                                // y do hexágono no viewport
+      let t=(vy-front+c.j)/170;if(t<=0)continue;if(t>1)t=1;
+      const e=1-Math.pow(1-t,3),sx=Math.sin(e*Math.PI/2),rot=(1-e)*c.spin;
+      hex(c.x,c.y,c.r*(.35+.7*e),sx,rot);ctx.fillStyle=to;ctx.fill();
+      if(e<1){ctx.fillStyle='rgba(255,255,255,'+((1-e)*.22).toFixed(3)+')';ctx.fill();ctx.strokeStyle=(c.hot?'rgba(255,139,97,':'rgba(0,194,231,')+(.95*(1-e)).toFixed(3)+')';ctx.lineWidth=1.4;ctx.stroke()}
+    }
+  };
+  const build=()=>{const dpr=Math.min(devicePixelRatio||1,2);w=el.clientWidth;h=el.clientHeight;cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+    const r=w<700?22:34,hw=Math.sqrt(3)*r,vs=1.5*r;cells=[];let row=0;
+    for(let y=h+r;y>-2*r;y-=vs,row++)for(let x=(row%2?hw/2:0)-hw;x<w+hw;x+=hw){const dx=Math.abs(x-w/2)/(w/2);
+      cells.push({x,y,r,j:-dx*innerHeight*.14+Math.random()*innerHeight*.1,spin:(Math.random()-.5)*1.4,hot:Math.random()>.94})}
+    state='';draw(last<0?0:last)};
+  build();addEventListener('resize',build);
+  if(!G||reduce){el.style.display='none';return}
+  ScrollTrigger.create({trigger:el.parentElement,start:'top bottom',end:'top 8%',onUpdate:s=>draw(s.progress),onRefresh:s=>draw(s.progress)});
+}
+$$('.seam').forEach(seam);
+
+/* ---------- HUD ---------- */
+const hudVal=$('#hudVal'),hudLbl=$('#hudLbl'),hudMark=$('#hudMark');
+function hudSet(sec){const [v,l,i]=(sec.dataset.scale||'').split('|');if(!v)return;
+  if(hudVal.textContent!==v){hudVal.textContent=v;hudLbl.textContent=l;if(G&&!reduce)gsap.fromTo([hudVal,hudLbl],{y:8,opacity:0},{y:0,opacity:1,duration:.45,ease:M.out,stagger:.05})}
+  hudMark.style.bottom=(Number(i)/7*85)+'px'}
+
+if(!G){return}
+
+/* ---------- scroll suave ---------- */
+let lenis=null;
+if(window.Lenis&&!reduce){
+  try{lenis=new Lenis({duration:1.15,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}catch(e){lenis=null}
+}
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const el=id.length>1&&$(id);if(!el)return;e.preventDefault();lenis?lenis.scrollTo(el,{offset:id==='#topo'?0:-10}):el.scrollIntoView({behavior:reduce?'auto':'smooth'})}));
+
+/* ---------- abertura cinematográfica ---------- */
+function intro(){
+  const pre=document.createElement('div');pre.className='pre';pre.setAttribute('aria-hidden','true');
+  pre.innerHTML='<div class="pre-in"><span class="sc" id="preSc">ESCALA 10⁻⁹ m</span><b>Tinano</b><div class="bar"><i></i></div></div>';
+  document.body.appendChild(pre);
+  const tl=gsap.timeline({defaults:{ease:M.drama}});
+  if(hasGL)gl.intro=1;
+  tl.to(pre.querySelector('.bar i'),{scaleX:1,duration:1,ease:'power2.inOut'},0)
+    .to(pre.querySelector('.pre-in'),{y:-20,opacity:0,duration:.5,ease:'power2.in'},1)
+    .to(pre,{opacity:0,duration:.6,ease:'power2.out',onComplete:()=>pre.remove()},1.25);
+  if(hasGL){
+    tl.to(gl,{intro:0,duration:2.6,ease:'power3.inOut'},1.15)
+      .to(gl.latMat,{opacity:1,duration:2.2,ease:'sine.inOut'},1.8);
+  }
+  tl.from('.ln>span',{yPercent:112,duration:1.2,stagger:.09},hasGL?2.55:1.3)
+    .from('#topo .eyebrow',{y:14,opacity:0,duration:.6,ease:M.out},'<')
+    .from(['.hero-sub','.hero-ctas','.hero-foot'],{y:24,opacity:0,duration:.9,stagger:.08,ease:M.out},'<0.35')
+    .from('#hdr',{yPercent:-100,opacity:0,duration:.9,ease:M.out},'<');
+  return tl;
+}
+if(!reduce)intro();else if(hasGL)gl.latMat.opacity=1;
+
+/* ---------- tom do header + escala ---------- */
+$$('main > .sec').forEach(sec=>ScrollTrigger.create({trigger:sec,start:'top 72px',end:'bottom 72px',onToggle:s=>{if(s.isActive){document.body.classList.toggle('on-light',sec.dataset.tone==='light');hudSet(sec)}}}));
+
+/* ---------- hero: pin + voo através do hexágono ---------- */
+if(!reduce){
+  ScrollTrigger.create({trigger:'#topo',start:'top top',end:'+=85%',pin:true,onUpdate:s=>{gl.heroP=s.progress;
+    const sc=['10⁻⁹ m','10⁻⁸ m','10⁻⁷ m','10⁻⁶ m'][Math.min(3,Math.floor(s.progress*4))];if(hudVal.textContent!==sc&&s.isActive){hudVal.textContent=sc}}});
+  gsap.to('.hero-copy',{y:-80,opacity:0,ease:'power1.in',scrollTrigger:{trigger:'#topo',start:'top top',end:'+=40%',scrub:true}});
+}
+ScrollTrigger.create({trigger:'#contato',start:'top 85%',end:'top 10%',onUpdate:s=>gl.contactP=s.progress});
+gsap.matchMedia().add('(max-width: 899px)',()=>{if(!hasGL)return;gsap.fromTo('#gl',{opacity:1},{opacity:.12,ease:'none',immediateRender:false,scrollTrigger:{trigger:'#contato',start:'top -5%',end:'top -35%',scrub:true}})});
+
+const mm=gsap.matchMedia();
+mm.add({desk:'(min-width: 900px)',motion:'(prefers-reduced-motion: no-preference)'},ctx=>{
+  const {desk,motion}=ctx.conditions;
+  if(!motion){$$('#manifesto .w').forEach(w=>w.style.color=w.classList.contains('k')?'#0288D1':'#0B1F44');return}
+
+  /* ---- manifesto: pin, palavras acendem, prisma gira ---- */
+  const words=$$('#manifesto .w');
+  const tlm=gsap.timeline({scrollTrigger:desk?{trigger:'#manPin',start:'top top',end:'+=60%',pin:true,scrub:.6}:{trigger:'#manifesto',start:'top 80%',end:'bottom 45%',scrub:.6}});
+  words.forEach((w,i)=>tlm.to(w,{color:w.classList.contains('k')?'#0288D1':'#0B1F44',duration:.4,ease:'none'},i*.12));
+  tlm.fromTo('#prism',{rotationY:20,rotationX:-14},{rotationY:320,rotationX:16,duration:words.length*.12+.4,ease:'none'},0);
+
+  /* ---- colmeia: células giram e se encaixam ---- */
+  if(desk){
+    const track=$('#hive'),faces=$$('.hcard .hface',track);
+    gsap.set(track,{rotationX:10,transformOrigin:'50% 50%'});
+    gsap.fromTo(faces,{rotationY:-75,z:-240,opacity:.4},{rotationY:0,z:0,opacity:1,ease:'power2.out',stagger:{each:.12,from:'center'},scrollTrigger:{trigger:track,start:'top 88%',end:'top 30%',scrub:.6}});
+    gsap.to(track,{rotationX:-6,ease:'none',scrollTrigger:{trigger:track,start:'top 30%',end:'bottom top',scrub:true}});
+  }else{
+    $$('.hcard').forEach(c=>gsap.from(c,{rotationX:-55,y:60,opacity:0,transformPerspective:900,duration:.9,ease:M.out,scrollTrigger:{trigger:c,start:'top 92%'}}));
+  }
+
+  /* ---- ecossistema ---- */
+  $$('.eco-trace').forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.dataset.len=L});
+  const tle=gsap.timeline({scrollTrigger:desk?{trigger:'#ecoPin',start:'top top',end:'+=100%',pin:true,scrub:.8}:{trigger:'#ecoPin',start:'top 75%',end:'bottom 70%',scrub:.6}});
+  tle.from('#eA',{y:-130,rotation:-40,scale:.6,opacity:.2,duration:1,ease:M.inOut},0)
+     .from('#eB',{x:-170,y:80,rotation:32,scale:.6,opacity:.2,duration:1,ease:M.inOut},0)
+     .from('#eC',{x:170,y:80,rotation:-28,scale:.6,opacity:.2,duration:1,ease:M.inOut},0)
+     .from('.eco-step',{opacity:.55,x:-14,duration:.35,stagger:.3},.05)
+     .from('.eco-trace',{strokeDashoffset:(i,el)=>el.dataset.len,duration:.5,stagger:.08,ease:'power2.out'},1)
+     .from('.eco-core',{scale:0,svgOrigin:'300 245',duration:.4,ease:'back.out(2)'},1.2)
+     .to('.eco-flows',{opacity:1,duration:.2},1.45)
+     .to({},{duration:.3});
+
+  /* ---- processo: túnel de placas ---- */
+  if(desk){
+    const proc=$('#processo .process'),steps=$('#steps'),plates=$$('.step',steps),cnt=$('#stageCount');
+    proc.classList.add('staged');steps.classList.add('stage');
+    const st={v:0};
+    const apply=()=>{const v=st.v;plates.forEach((p,i)=>{const d=v-i;
+      const z=d*560,op=d>0?clamp(1-d*1.7):clamp(1-(-d)*.32,.08,1);
+      gsap.set(p,{z,y:d*-40,rotationX:-d*12,rotationZ:d*2,opacity:op,zIndex:10-Math.round(Math.abs(d)*2)});
+      p.classList.toggle('on',d>-.5);
+    });const k=Math.min(4,Math.round(v)+1);cnt.textContent='ETAPA '+k+' / 4'};
+    apply();
+    const tw=gsap.to(st,{v:3,ease:'none',onUpdate:apply,scrollTrigger:{trigger:proc,start:'top top',end:'+=170%',pin:true,scrub:.7,snap:{snapTo:1/3,duration:{min:.2,max:.6},ease:'power2.inOut'}}});
+    return()=>{proc.classList.remove('staged');steps.classList.remove('stage');plates.forEach(p=>{gsap.set(p,{clearProps:'all'})})};
+  }else{
+    gsap.fromTo('#railFill',{scaleY:0},{scaleY:1,ease:'none',scrollTrigger:{trigger:'#steps',start:'top 62%',end:'bottom 62%',scrub:true}});
+    $$('.step').forEach(s=>ScrollTrigger.create({trigger:s,start:'top 62%',onEnter:()=>s.classList.add('on'),onLeaveBack:()=>s.classList.remove('on')}));
+  }
+});
+
+if(reduce)$$('.step').forEach(s=>s.classList.add('on'));
+
+if(!reduce){
+  /* ---- cases: cartões empilham; o anterior recua e escurece ---- */
+  const cs=$$('.case');
+  cs.forEach((c,i)=>{
+    const inner=c.querySelector('.case-in'),dim=c.querySelector('.case-dim');
+    $$('.scr .px',c).forEach((el,k)=>gsap.fromTo(el,{y:24+k*6},{y:-18-k*5,ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'bottom top',scrub:true}}));
+    gsap.from(c.querySelector('.shot'),{clipPath:'inset(12% 8% 12% 8% round 10px)',ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top 45%',scrub:true}});
+    const next=cs[i+1];if(!next)return;
+    gsap.timeline({scrollTrigger:{trigger:next,start:'top bottom',end:'top 30%',scrub:true}})
+      .to(inner,{scale:.92,rotationX:6,transformPerspective:1400,ease:'none'},0)
+      .to(dim,{opacity:.55,ease:'none'},0);
+  });
+  /* ---- segmentos: fitas em sentidos opostos ---- */
+  gsap.fromTo('#mr1',{xPercent:0},{xPercent:-35,ease:'none',scrollTrigger:{trigger:'.marquee',start:'top bottom',end:'bottom top',scrub:.5}});
+  gsap.fromTo('#mr2',{xPercent:-35},{xPercent:0,ease:'none',scrollTrigger:{trigger:'.marquee',start:'top bottom',end:'bottom top',scrub:.5}});
+  /* ---- fluxo de dados nas trilhas do ecossistema ---- */
+  $$('.eco-flow').forEach((p,i)=>{const L=p.getTotalLength();gsap.set(p,{strokeDasharray:'8 '+(L+8)});gsap.fromTo(p,{strokeDashoffset:8},{strokeDashoffset:-L,duration:1.4,ease:'power1.inOut',repeat:-1,delay:i*.35,repeatDelay:.6})});
+  /* ---- pulso no mapa ---- */
+  gsap.fromTo('.map-pulse',{attr:{r:8},opacity:1},{attr:{r:34},opacity:0,duration:2.2,repeat:-1,ease:'power2.out'});
+}
+
+/* ---------- microinterações ---------- */
+if(fine&&!reduce){
+  document.body.classList.add('has-cursor');
+  const dot=$('.cur'),ringEl=$('.cur-ring');
+  const dx=gsap.quickTo(dot,'x',{duration:.08}),dy=gsap.quickTo(dot,'y',{duration:.08});
+  const rxq=gsap.quickTo(ringEl,'x',{duration:.45,ease:M.out}),ryq=gsap.quickTo(ringEl,'y',{duration:.45,ease:M.out});
+  addEventListener('pointermove',e=>{dx(e.clientX);dy(e.clientY);rxq(e.clientX);ryq(e.clientY)},{passive:true});
+  $$('a,button,summary,.hcard').forEach(el=>{el.addEventListener('pointerenter',()=>ringEl.classList.add('big'));el.addEventListener('pointerleave',()=>ringEl.classList.remove('big'))});
+  $$('.magnetic').forEach(el=>{
+    el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.28,y:(e.clientY-r.top-r.height/2)*.35,duration:.4,ease:M.out})});
+    el.addEventListener('pointerleave',()=>gsap.to(el,{x:0,y:0,duration:.7,ease:'elastic.out(1,.45)'}));
+  });
+  const tilt=(el,inner,amt)=>{
+    el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;gsap.to(inner,{rotationY:px*amt,rotationX:-py*amt,duration:.5,ease:M.out,transformPerspective:900})});
+    el.addEventListener('pointerleave',()=>gsap.to(inner,{rotationY:0,rotationX:0,duration:.8,ease:M.out}));
+  };
+  $$('.proj').forEach(p=>tilt(p,p.querySelector('.proj-in'),9));
+  $$('.hcard').forEach(c=>tilt(c,c.querySelector('.hbody'),14));
+}
+
+ScrollTrigger.sort();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>ScrollTrigger.refresh());
+addEventListener('load',()=>ScrollTrigger.refresh());
+})();
+
+</script>
+
+</body>
+</html>
