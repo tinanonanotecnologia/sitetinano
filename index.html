@@ -115,6 +115,10 @@ body.no-webgl .hero-art{display:block}
   body.no-webgl .hero-in{padding-top:110px}
   .hero-art{order:-1;width:min(240px,60%)}
 }
+@media (min-width:900px){
+  .hero-copy{padding-top:36px}
+  .hero-foot{gap:8px 16px;padding-top:4px}
+}
 
 /* ---------- manifesto ---------- */
 .manifesto{padding-block:72px 110px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:48px;align-items:center;min-height:86vh}
@@ -162,7 +166,7 @@ body.no-webgl .hero-art{display:block}
 }
 
 /* ---------- ecossistema ---------- */
-.eco-pin{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:48px;padding-block:80px}
+.eco-pin{min-height:78vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:48px;padding-block:52px}
 .eco-steps{display:grid;gap:22px;margin-top:34px;padding:0;list-style:none}
 .eco-step{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline}
 .eco-step b{font-family:var(--f-mono);font-size:.74rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;grid-row:span 2;min-width:4.6em}
@@ -191,7 +195,7 @@ body.no-webgl .hero-art{display:block}
 .step h3{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:500}
 .step p{color:var(--ink-2);max-width:46ch}
 @media (max-width:899px){.process{grid-template-columns:1fr;gap:48px;padding-bottom:150px}.process .sec-head{position:static}}
-.process.staged{min-height:100vh;align-items:center;padding-block:96px}
+.process.staged{min-height:78vh;align-items:center;padding-block:64px}
 .process.staged .sec-head{position:static}
 .steps.stage{display:block;height:440px;padding-left:0;perspective:1200px;transform-style:preserve-3d}
 .steps.stage .rail{display:none}
@@ -204,7 +208,7 @@ body.no-webgl .hero-art{display:block}
 .staged .stage-count{display:block}
 
 /* ---------- cases (cartões empilhados) ---------- */
-.cases{padding-block:72px 90px;display:grid;gap:44px}
+.cases{padding-block:38px 70px;display:grid;gap:30px}
 .stack{display:grid;gap:4vh;padding-bottom:6vh}
 .case{position:sticky;top:calc(88px + var(--i)*14px);height:min(72vh,620px);min-height:440px}
 .case-in{position:relative;height:100%;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(20px,3vw,44px);padding:clamp(22px,3vw,40px);background:var(--cbg);color:var(--cfg);clip-path:polygon(28px 0,100% 0,100% calc(100% - 28px),calc(100% - 28px) 100%,0 100%,0 28px);transform-origin:50% 0;will-change:transform}
@@ -969,7 +973,7 @@ mm.add({desk:'(min-width: 900px)',motion:'(prefers-reduced-motion: no-preference
 
   /* ---- ecossistema ---- */
   $$('.eco-trace').forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.dataset.len=L});
-  const tle=gsap.timeline({scrollTrigger:desk?{trigger:'#ecoPin',start:'top top',end:'+=100%',pin:true,scrub:.8}:{trigger:'#ecoPin',start:'top 75%',end:'bottom 70%',scrub:.6}});
+  const tle=gsap.timeline({scrollTrigger:desk?{trigger:'#ecoPin',start:'top top',end:'+=65%',pin:true,scrub:.8}:{trigger:'#ecoPin',start:'top 75%',end:'bottom 70%',scrub:.6}});
   tle.from('#eA',{y:-130,rotation:-40,scale:.6,opacity:.2,duration:1,ease:M.inOut},0)
      .from('#eB',{x:-170,y:80,rotation:32,scale:.6,opacity:.2,duration:1,ease:M.inOut},0)
      .from('#eC',{x:170,y:80,rotation:-28,scale:.6,opacity:.2,duration:1,ease:M.inOut},0)
@@ -990,7 +994,7 @@ mm.add({desk:'(min-width: 900px)',motion:'(prefers-reduced-motion: no-preference
       p.classList.toggle('on',d>-.5);
     });const k=Math.min(4,Math.round(v)+1);cnt.textContent='ETAPA '+k+' / 4'};
     apply();
-    const tw=gsap.to(st,{v:3,ease:'none',onUpdate:apply,scrollTrigger:{trigger:proc,start:'top top',end:'+=170%',pin:true,scrub:.7,snap:{snapTo:1/3,duration:{min:.2,max:.6},ease:'power2.inOut'}}});
+    const tw=gsap.to(st,{v:3,ease:'none',onUpdate:apply,scrollTrigger:{trigger:proc,start:'top top',end:'+=95%',pin:true,scrub:.7,snap:{snapTo:1/3,duration:{min:.2,max:.6},ease:'power2.inOut'}}});
     return()=>{proc.classList.remove('staged');steps.classList.remove('stage');plates.forEach(p=>{gsap.set(p,{clearProps:'all'})})};
   }else{
     gsap.fromTo('#railFill',{scaleY:0},{scaleY:1,ease:'none',scrollTrigger:{trigger:'#steps',start:'top 62%',end:'bottom 62%',scrub:true}});
