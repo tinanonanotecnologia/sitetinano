@@ -225,6 +225,8 @@ body.no-webgl .hero-art{display:block}
 .shot .bar i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35)}
 .shot .bar em{margin-left:10px;font:400 .66rem var(--f-mono);font-style:normal;color:rgba(255,255,255,.7)}
 .scr{position:absolute;inset:0;overflow:hidden}
+.shot--screenshot .scr{inset:26px 0 0;background:#eee9df}
+.shot--screenshot .scr img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
 .scr .px{position:absolute;will-change:transform}
 .art-t{position:absolute;left:7%;bottom:12%;max-width:62%;z-index:1}
 .art-t small{display:block;font:500 .66rem var(--f-mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;opacity:.9}
@@ -235,6 +237,9 @@ body.no-webgl .hero-art{display:block}
   .case{height:auto;min-height:0;top:calc(76px + var(--i)*10px)}
   .case-in{grid-template-columns:1fr;clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px)}
   .shot{height:auto;aspect-ratio:16/11;order:-1}
+  .shot--screenshot{aspect-ratio:auto}
+  .shot--screenshot .scr{position:relative;inset:auto;padding-top:26px}
+  .shot--screenshot .scr img{height:auto}
   .case .chips{margin-top:4px}
 }
 /* ---------- projetos (legado) ---------- */
@@ -533,12 +538,8 @@ body.on-light .hud b{color:var(--deep)}
       </div>
       <div class="stack">
         <article class="case" style="--i:0;--cbg:#070B14;--cfg:#F2F5FA;--cac:#4C8DFF"><div class="case-in">
-          <div class="case-info"><span class="case-n">01 / 07</span><h3>GWM Betral-e</h3><p class="case-seg">Concessionária GWM · Macapá/AP</p><p class="case-desc">Site imersivo para a concessionária GWM: vitrine 3D com as versões, cena do H6 GT e agendamento de test drive.</p><div class="chips"><span>Site imersivo</span><span>Vitrine 3D</span><span>Test drive</span></div></div>
-          <div class="shot"><div class="bar"><i></i><i></i><i></i><em>betral-e.com.br</em></div><div class="scr" style="background:radial-gradient(120% 80% at 70% 110%,#1b3f8f 0%,#0a1630 45%,#03060d 75%)">
-  <div class="px" style="left:-5%;right:-5%;top:58%;height:2px;background:linear-gradient(90deg,transparent,#4C8DFF,#cfe0ff,#4C8DFF,transparent);box-shadow:0 0 30px 6px rgba(76,141,255,.55)"></div>
-  <div class="px" style="right:-4%;top:14%;font:700 clamp(4rem,9vw,8.5rem)/.9 var(--f-display);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(207,224,255,.45)">H6 GT</div>
-  <svg class="px" viewBox="0 0 400 120" style="right:6%;top:40%;width:58%" aria-hidden="true"><path d="M20 92c10-24 40-30 70-34l50-22c30-12 90-14 130-2l50 18c22 6 48 10 58 26l2 14H20z" fill="#0b1326" stroke="#4C8DFF" stroke-width="2"/><circle cx="95" cy="94" r="20" fill="#03060d" stroke="#cfe0ff" stroke-width="3"/><circle cx="310" cy="94" r="20" fill="#03060d" stroke="#cfe0ff" stroke-width="3"/><path d="M150 40l30-12c30-8 70-8 100 2l18 10z" fill="rgba(76,141,255,.25)"/></svg>
-  <div class="art-t" style="color:#fff"><small style="color:#9fc0ff">Eletrificados GWM</small><b style="font:600 clamp(1rem,1.9vw,1.6rem)/1.05 var(--f-display)">Você nos leva<br>mais longe.</b><span class="art-btn" style="background:#4C8DFF;color:#fff">Agendar test drive</span></div></div></div>
+          <div class="case-info"><span class="case-n">01 / 07</span><h3>Mente Criativa</h3><p class="case-seg">Espaço Multiprofissional - Maringá/PR</p><p class="case-desc">Desenvolvimento humano <em>em todas</em> as fases da vida.</p><div class="chips"><span><strong>Acolher • Desenvolver • Transformar</strong></span></div></div>
+          <div class="shot shot--screenshot"><div class="bar"><i></i><i></i><i></i><em>www.mentecriativamga.com.br</em></div><div class="scr"><img src="assets/mente-criativa-home.png" alt="Página inicial da Mente Criativa, Espaço Multiprofissional em Maringá, com a mensagem Desenvolvimento humano em todas as fases da vida." width="1295" height="594" loading="lazy" decoding="async"></div></div>
           <div class="case-dim"></div>
         </div></article>
         <article class="case" style="--i:1;--cbg:#0E0A06;--cfg:#F3EFE6;--cac:#C9A45E"><div class="case-in">
@@ -1009,7 +1010,8 @@ if(!reduce){
   cs.forEach((c,i)=>{
     const inner=c.querySelector('.case-in'),dim=c.querySelector('.case-dim');
     $$('.scr .px',c).forEach((el,k)=>gsap.fromTo(el,{y:24+k*6},{y:-18-k*5,ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'bottom top',scrub:true}}));
-    gsap.from(c.querySelector('.shot'),{clipPath:'inset(12% 8% 12% 8% round 10px)',ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top 45%',scrub:true}});
+    const shot=c.querySelector('.shot');
+    if(!shot.classList.contains('shot--screenshot'))gsap.from(shot,{clipPath:'inset(12% 8% 12% 8% round 10px)',ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top 45%',scrub:true}});
     const next=cs[i+1];if(!next)return;
     gsap.timeline({scrollTrigger:{trigger:next,start:'top bottom',end:'top 30%',scrub:true}})
       .to(inner,{scale:.92,rotationX:6,transformPerspective:1400,ease:'none'},0)
